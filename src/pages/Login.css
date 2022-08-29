@@ -1,16 +1,16 @@
-/* #login {
-  display: flex;
-  justify-content: center;
+.login {
   align-items: center;
+  display: flex;
   height: 800px;
+  justify-content: center;
   width: 100%;
 }
 
-#form {
-  display: flex;
-  justify-content: center;
+.form {
   align-items: center;
   border: 2px solid grey;
+  display: flex;
   height: 400px;
+  justify-content: center;
   width: 400px;
-} */
+}

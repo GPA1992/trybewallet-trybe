@@ -40,8 +40,8 @@ class Login extends React.Component {
   render() {
     const { disableEnter } = this.state;
     return (
-      <div id="login">
-        <div id="form">
+      <div className="login">
+        <div className="form">
           <form action="">
             <label htmlFor="email">
               email

@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+    border: 2px solid orange;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+th {
+    border: 2px solid black;
+    background-color: grey;
+}
+td {
+    border: 2px solid black;
+}

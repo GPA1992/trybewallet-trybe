@@ -12,7 +12,7 @@ class WalletForm extends Component {
     super();
 
     this.state = {
-      value: '',
+      value: 0,
       description: '',
       currency: 'USD',
       method: 'Cartão de crédito',
@@ -39,9 +39,10 @@ class WalletForm extends Component {
     const { currencies } = this.props;
     const exchangeRates = currencies;
     const id = expenses.length;
+    const newValue = Number(value).toFixed(2);
     const currentExpense = {
       id,
-      value,
+      value: newValue,
       description,
       method,
       currency,

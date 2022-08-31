@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCurrenciesKeys, fetchCurrencies,
   getExpenses, getCurrentExpense } from '../redux/actions';
+import Table from './Table';
 
 class WalletForm extends Component {
   constructor() {
@@ -165,14 +166,15 @@ class WalletForm extends Component {
             </button>
           </div>
         </form>
+        <Table />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  currenciesKey: state.wallet.currenciesKey,
-  currencies: state.wallet.currencies,
+  currenciesKey: state.wallet.currencies,
+  currencies: state.wallet.currenciesFull,
   expenses: state.wallet.expenses,
 });
 

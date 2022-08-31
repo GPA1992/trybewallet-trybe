@@ -3,8 +3,8 @@ import { GET_CURRENCIES_KEY,
   GET_CURRENCIES, GET_EXPENSES, CURRENT_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
-  currenciesKey: [],
-  currencies: {},
+  currencies: [],
+  currenciesFull: {},
   expenses: [],
   totalExpenseValue: 0,
 };
@@ -14,13 +14,13 @@ const wallet = (state = INITIAL_STATE, action) => {
   case GET_CURRENCIES_KEY: {
     return {
       ...state,
-      currenciesKey: [...action.currenciesKey],
+      currencies: [...action.currenciesKey],
     };
   }
   case GET_CURRENCIES: {
     return {
       ...state,
-      currencies: action.currencies,
+      currenciesFull: action.currencies,
     };
   }
   case GET_EXPENSES: {

@@ -44,7 +44,7 @@ Header.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string.isRequired,
   }).isRequired,
-  actualExpenseValue: PropTypes.string.isRequired,
+  actualExpenseValue: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Header);

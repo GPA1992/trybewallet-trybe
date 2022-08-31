@@ -1,4 +1,5 @@
 export const GET_USER_INFO = 'GET_USER_INFO';
+export const GET_CURRENCIES_KEY = 'GET_CURRENCIES_KEY';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const GET_EXPENSES = 'GET_EXPENSES';
@@ -13,9 +14,9 @@ export const requestCurrencies = () => ({
   type: REQUEST_CURRENCIES,
 });
 
-export const recieveCurrencies = (currencies) => ({
-  type: GET_CURRENCIES,
-  currencies: [...currencies],
+export const recieveCurrenciesKeys = (currenciesKey) => ({
+  type: GET_CURRENCIES_KEY,
+  currenciesKey: [...currenciesKey],
 });
 
 export function fetchCurrenciesKeys() {
@@ -24,13 +25,28 @@ export function fetchCurrenciesKeys() {
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const currencies = await response.json();
     delete currencies.USDT;
-    return dispatch(recieveCurrencies(Object.keys(currencies))) && currencies;
+    return dispatch(recieveCurrenciesKeys(Object.keys(currencies)));
   };
 }
 
-export const getExpenses = (state) => ({
+export const recieveCurrencies = (currencies) => ({
+  type: GET_CURRENCIES,
+  currencies,
+});
+
+export function fetchCurrencies() {
+  return async (dispatch) => {
+    dispatch(requestCurrencies());
+    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+    const currencies = await response.json();
+    delete currencies.USDT;
+    return dispatch(recieveCurrencies(currencies));
+  };
+}
+
+export const getExpenses = (expense) => ({
   type: GET_EXPENSES,
-  ...state,
+  payload: expense,
 });
 
 export const getCurrentExpense = (totalExpenseValue) => ({

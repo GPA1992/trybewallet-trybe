@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Wallet.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrenciesKeys, getExpenses, getCurrentExpense } from '../redux/actions';
+import { fetchCurrenciesKeys, fetchCurrencies,
+  getExpenses, getCurrentExpense } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -21,8 +22,8 @@ class WalletForm extends Component {
   }
 
   async componentDidMount() {
-    const { getCurrencies } = this.props;
-    await getCurrencies();
+    const { getCurrenciesKey } = this.props;
+    await getCurrenciesKey();
   }
 
   handleChange = ({ target }) => {
@@ -34,7 +35,9 @@ class WalletForm extends Component {
     const { value, description, method, currency, tag, totalExpenseValue } = this.state;
     const { getCurrencies, getCurrentExpenses,
       expenses, getTotalValueExpense } = this.props;
-    const exchangeRates = await getCurrencies();
+    await getCurrencies();
+    const { currencies } = this.props;
+    const exchangeRates = currencies;
     const id = expenses.length;
     const currentExpense = {
       id,
@@ -50,14 +53,14 @@ class WalletForm extends Component {
     const { ask } = currentCurrency;
     const expenseValue = ask * value;
     const previousExpense = expenseValue + totalExpenseValue;
-    const expenseFixed = previousExpense.toFixed(2);
+    const expenseFixed = Number(previousExpense.toFixed(2));
     getTotalValueExpense(expenseFixed);
     this.setState({ totalExpenseValue: previousExpense });
   };
 
   render() {
     const { allCategory, paymentMethod } = this.state;
-    const { currencies } = this.props;
+    const { currenciesKey } = this.props;
     return (
       <div>
         <form className="wallet-form" action="">
@@ -100,7 +103,7 @@ class WalletForm extends Component {
                 data-testid="currency-input"
                 id="selectExchange"
               >
-                { currencies.map((currency, index) => (
+                { currenciesKey.map((currency, index) => (
                   <option
                     key={ index }
                     value={ currency }
@@ -168,18 +171,21 @@ class WalletForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  currenciesKey: state.wallet.currenciesKey,
   currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: (state) => dispatch(fetchCurrenciesKeys(state)),
+  getCurrenciesKey: (state) => dispatch(fetchCurrenciesKeys(state)),
+  getCurrencies: (state) => dispatch(fetchCurrencies(state)),
   getCurrentExpenses: (state) => dispatch(getExpenses(state)),
   getTotalValueExpense: (state) => dispatch(getCurrentExpense(state)),
 });
 
 WalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  currenciesKey: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getCurrenciesKey: PropTypes.func.isRequired,
   getCurrencies: PropTypes.func.isRequired,
   getCurrentExpenses: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
@@ -188,6 +194,7 @@ WalletForm.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   getTotalValueExpense: PropTypes.func.isRequired,
+  currencies: PropTypes.shape({}).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

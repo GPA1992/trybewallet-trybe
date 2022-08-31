@@ -2,6 +2,7 @@ export const GET_USER_INFO = 'GET_USER_INFO';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const GET_EXPENSES = 'GET_EXPENSES';
+export const CURRENT_EXPENSE = 'CURRENT_EXPENSE';
 
 export const getUserInfo = (state) => ({
   type: GET_USER_INFO,
@@ -14,7 +15,7 @@ export const requestCurrencies = () => ({
 
 export const recieveCurrencies = (currencies) => ({
   type: GET_CURRENCIES,
-  currencies,
+  currencies: [...currencies],
 });
 
 export function fetchCurrenciesKeys() {
@@ -30,4 +31,9 @@ export function fetchCurrenciesKeys() {
 export const getExpenses = (state) => ({
   type: GET_EXPENSES,
   ...state,
+});
+
+export const getCurrentExpense = (totalExpenseValue) => ({
+  type: CURRENT_EXPENSE,
+  totalExpenseValue,
 });

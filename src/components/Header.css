@@ -1,0 +1,16 @@
+.header-expenses {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.expense-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10px;
+    background-color: aqua;
+    width: 200px;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Wallet.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { CATEGORY_EXP, PAYMENT_METHOD } from '../Data/Index';
 import { fetchCurrenciesKeys, fetchCurrencies,
   getExpenses, getCurrentExpense } from '../redux/actions';
 import Table from './Table';
@@ -11,8 +12,6 @@ class WalletForm extends Component {
     super();
 
     this.state = {
-      allCategory: ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'],
-      paymentMethod: ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'],
       value: '',
       description: '',
       currency: 'USD',
@@ -60,7 +59,6 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { allCategory, paymentMethod } = this.state;
     const { currenciesKey } = this.props;
     return (
       <div>
@@ -125,7 +123,7 @@ class WalletForm extends Component {
                 id="method"
                 data-testid="method-input"
               >
-                { paymentMethod.map((myMethod, index) => (
+                { PAYMENT_METHOD.map((myMethod, index) => (
                   <option
                     key={ index }
                     value={ myMethod }
@@ -146,7 +144,7 @@ class WalletForm extends Component {
                 id="category"
                 data-testid="tag-input"
               >
-                { allCategory.map((category, index) => (
+                { CATEGORY_EXP.map((category, index) => (
                   <option
                     key={ index }
                     value={ category }

@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
+import { TH_ITEM } from '../Data/Index';
 
 class Table extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+
+    };
+  }
+
   render() {
     return (
       <div>
         <table>
-          <tr>
-            <th>nome</th>
-            <th>idade</th>
-          </tr>
-          <tr>
-            <td>gabriel</td>
-            <td>29</td>
-          </tr>
+          <thead>
+            <tr>
+              { TH_ITEM.map((tableHead, i) => (
+                <th key={ i }>{ tableHead }</th>
+              ))}
+            </tr>
+          </thead>
         </table>
       </div>
     );

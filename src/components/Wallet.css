@@ -1,16 +1,16 @@
 .wallet-form {
-    display: flex;
-    width: 100%;
-    border: 2px solid black;
-    justify-content: space-around;
-    background-color: gray;
+  background-color: gray;
+  border: 2px solid black;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .form-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    margin: 5px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  padding: 5px;
 }

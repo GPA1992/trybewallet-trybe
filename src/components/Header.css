@@ -1,16 +1,16 @@
 .header-expenses {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .expense-value {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px;
-    background-color: aqua;
-    width: 200px;
+  align-items: center;
+  background-color: aqua;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+  width: 200px;
 }

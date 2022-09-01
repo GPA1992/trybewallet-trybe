@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { CATEGORY_EXP, PAYMENT_METHOD } from '../Data/Index';
 import { fetchCurrenciesKeys, fetchCurrencies,
-  getExpenses, getCurrentExpense } from '../redux/actions';
+  getExpenses } from '../redux/actions';
 import Table from './Table';
 
 class WalletForm extends Component {
@@ -17,7 +17,6 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Cartão de crédito',
       tag: 'Alimentação',
-      totalExpenseValue: 0,
     };
   }
 
@@ -32,14 +31,14 @@ class WalletForm extends Component {
   };
 
   handleClick = async () => {
-    const { value, description, method, currency, tag, totalExpenseValue } = this.state;
+    const { value, description, method, currency, tag } = this.state;
     const { getCurrencies, getCurrentExpenses,
-      expenses, getTotalValueExpense } = this.props;
+      expenses } = this.props;
     await getCurrencies();
     const { currencies } = this.props;
     const exchangeRates = currencies;
     const id = expenses.length;
-    const newValue = Number(value).toFixed(2);
+    const newValue = value;
     const currentExpense = {
       id,
       value: newValue,
@@ -50,13 +49,6 @@ class WalletForm extends Component {
       exchangeRates,
     };
     getCurrentExpenses(currentExpense);
-    const currentCurrency = exchangeRates[currency];
-    const { ask } = currentCurrency;
-    const expenseValue = ask * value;
-    const previousExpense = expenseValue + totalExpenseValue;
-    const expenseFixed = Number(previousExpense.toFixed(2));
-    getTotalValueExpense(expenseFixed);
-    this.setState({ totalExpenseValue: previousExpense });
   };
 
   render() {
@@ -181,7 +173,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCurrenciesKey: (state) => dispatch(fetchCurrenciesKeys(state)),
   getCurrencies: (state) => dispatch(fetchCurrencies(state)),
   getCurrentExpenses: (state) => dispatch(getExpenses(state)),
-  getTotalValueExpense: (state) => dispatch(getCurrentExpense(state)),
+  getTotalValueExpense: (state) => dispatch(getCurrentExpenseValue(state)),
 });
 
 WalletForm.propTypes = {
@@ -194,7 +186,6 @@ WalletForm.propTypes = {
     exchangeRates: PropTypes.shape({}),
     value: PropTypes.string.isRequired,
   })).isRequired,
-  getTotalValueExpense: PropTypes.func.isRequired,
   currencies: PropTypes.shape({}).isRequired,
 };
 

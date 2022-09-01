@@ -3,7 +3,8 @@ export const GET_CURRENCIES_KEY = 'GET_CURRENCIES_KEY';
 export const GET_CURRENCIES = 'GET_CURRENCIES';
 export const REQUEST_CURRENCIES = 'REQUEST_CURRENCIES';
 export const GET_EXPENSES = 'GET_EXPENSES';
-export const CURRENT_EXPENSE = 'CURRENT_EXPENSE';
+export const CURRENT_EXPENSE_VALUE = 'CURRENT_EXPENSE_VALUE';
+export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 
 export const getUserInfo = (state) => ({
   type: GET_USER_INFO,
@@ -49,7 +50,7 @@ export const getExpenses = (expense) => ({
   payload: expense,
 });
 
-export const getCurrentExpense = (totalExpenseValue) => ({
-  type: CURRENT_EXPENSE,
-  totalExpenseValue,
+export const removeExpense = (expenseID) => ({
+  type: REMOVE_EXPENSE,
+  payload: expenseID,
 });

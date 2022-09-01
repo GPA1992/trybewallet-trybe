@@ -3,18 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TH_ITEM } from '../Data/Index';
 import './Table.css';
+import { removeExpense } from '../redux/actions';
 
 class Table extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-
-    };
-  }
-
   render() {
-    const { expenses } = this.props;
+    const { expenses, removeCurrentExpense } = this.props;
     return (
       <div>
         <table>
@@ -31,7 +24,7 @@ class Table extends Component {
                 <td>{ exp.description }</td>
                 <td>{ exp.tag }</td>
                 <td>{ exp.method }</td>
-                <td>{ exp.value }</td>
+                <td>{ Number(exp.value).toFixed(2) }</td>
                 <td>{ exp.currency }</td>
                 <td>{`${exp.exchangeRates[exp.currency].name}`}</td>
                 <td>
@@ -40,8 +33,15 @@ class Table extends Component {
                   }
                 </td>
                 <td>{ Number(exp.exchangeRates[exp.currency].ask).toFixed(2) }</td>
-                <td>
-                  <button key={ exp.id } type="button">Editar/Excluir</button>
+                <td key={ exp.id }>
+                  <button type="button">Editar</button>
+                  <button
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ () => removeCurrentExpense(exp.id) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}
@@ -56,12 +56,17 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  removeCurrentExpense: (state) => dispatch(removeExpense(state)),
+});
+
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({
     currency: PropTypes.string.isRequired,
     exchangeRates: PropTypes.shape({}),
     value: PropTypes.string.isRequired,
   })).isRequired,
+  removeCurrentExpense: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

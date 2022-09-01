@@ -49,7 +49,6 @@ Header.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.shape({
     currency: PropTypes.string.isRequired,
     exchangeRates: PropTypes.shape({}),
-    value: PropTypes.string.isRequired,
   })).isRequired,
 };
 

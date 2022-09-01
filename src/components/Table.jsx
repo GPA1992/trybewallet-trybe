@@ -3,9 +3,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { TH_ITEM } from '../Data/Index';
 import './Table.css';
-import { removeExpense } from '../redux/actions';
+import { removeExpense, startExpenseEdit, selectExpense } from '../redux/actions';
 
 class Table extends Component {
+  expenseEdit = (expenseID) => {
+    const { selectedEditExpense, startEdit, removeCurrentExpense } = this.props;
+    startEdit(false);
+    selectedEditExpense(expenseID);
+    removeCurrentExpense(expenseID);
+  };
+
   render() {
     const { expenses, removeCurrentExpense } = this.props;
     return (
@@ -33,8 +40,14 @@ class Table extends Component {
                   }
                 </td>
                 <td>{ Number(exp.exchangeRates[exp.currency].ask).toFixed(2) }</td>
-                <td key={ exp.id }>
-                  <button type="button">Editar</button>
+                <td>
+                  <button
+                    onClick={ () => this.expenseEdit(exp.id) }
+                    data-testid="edit-btn"
+                    type="button"
+                  >
+                    Editar
+                  </button>
                   <button
                     data-testid="delete-btn"
                     type="button"
@@ -58,6 +71,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   removeCurrentExpense: (state) => dispatch(removeExpense(state)),
+  startEdit: (state) => dispatch(startExpenseEdit(state)),
+  selectedEditExpense: (state) => dispatch(selectExpense(state)),
 });
 
 Table.propTypes = {
@@ -67,6 +82,8 @@ Table.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   removeCurrentExpense: PropTypes.func.isRequired,
+  startEdit: PropTypes.func.isRequired,
+  selectedEditExpense: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

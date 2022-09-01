@@ -1,12 +1,15 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 import { GET_CURRENCIES_KEY,
   GET_CURRENCIES, GET_EXPENSES,
-  REMOVE_EXPENSE } from '../actions';
+  REMOVE_EXPENSE, START_EXPENSE_EDIT,
+  SELECT_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   currenciesFull: {},
   expenses: [],
+  inEditing: true,
+  inEditingExpense: {},
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -26,13 +29,25 @@ const wallet = (state = INITIAL_STATE, action) => {
   case GET_EXPENSES: {
     return {
       ...state,
-      expenses: [...state.expenses, action.payload],
+      expenses: [...state.expenses, action.payload].sort((xID, yID) => xID.id - yID.id),
     };
   }
   case REMOVE_EXPENSE: {
     return {
       ...state,
       expenses: state.expenses.filter((exp) => exp.id !== action.payload),
+    };
+  }
+  case START_EXPENSE_EDIT: {
+    return {
+      ...state,
+      inEditing: action.toggle,
+    };
+  }
+  case SELECT_EXPENSE: {
+    return {
+      ...state,
+      inEditingExpense: state.expenses.find((exp) => exp.id === action.payload),
     };
   }
   default:

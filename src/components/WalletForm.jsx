@@ -32,7 +32,6 @@ class WalletForm extends Component {
 
   handleClick = async () => {
     const { value, description, method, currency, tag } = this.state;
-    console.log(method);
     const { getCurrencies, getCurrentExpenses,
       expenses } = this.props;
     await getCurrencies();

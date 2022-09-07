@@ -9,7 +9,15 @@ const INITIAL_STATE = {
   currenciesFull: {},
   expenses: [],
   inEditing: true,
-  inEditingExpense: {},
+  inEditingExpense: {
+    id: 0,
+    currency: '',
+    exchangeRates: {},
+    value: '',
+    description: '',
+    method: '',
+    tag: '',
+  },
 };
 
 const wallet = (state = INITIAL_STATE, action) => {

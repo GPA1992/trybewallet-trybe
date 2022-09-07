@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { CATEGORY_EXP, PAYMENT_METHOD } from '../Data/Index';
 import { fetchCurrenciesKeys, fetchCurrencies,
   getExpenses } from '../redux/actions';
-import WalletEditForm from './EditForm';
+import EditForm from './EditForm';
 
 class WalletForm extends Component {
   constructor() {
@@ -98,7 +98,7 @@ class WalletForm extends Component {
                   { currenciesKey.map((currency, index) => (
                     <option
                       key={ index }
-                      value={ currency }
+                      name={ currency }
                     >
                       {currency}
                     </option>))}
@@ -157,7 +157,7 @@ class WalletForm extends Component {
             </div>
           </form>
         ) : (
-          <WalletEditForm />
+          <EditForm />
         )}
       </div>
     );

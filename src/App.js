@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/carteira" component={ Wallet } />
+          <Route path="/carteira" component={ Wallet } />
         </Switch>
       </BrowserRouter>
     </div>

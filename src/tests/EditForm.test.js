@@ -15,7 +15,7 @@ describe('Testes no componente Form', () => {
   it(`Testa se existe um campo para inserir a descrição da despesa com um label com o 
   label  'Descrição da Despesa'`, () => {
     renderWithRouterAndRedux(<EditForm />);
-    const descriptionInput = screen.getByTestId('description-input');
+    const descriptionInput = screen.getByTestId('description-edit-input');
     const textLabel = screen.getByText(/descrição da despesa/i);
     expect(descriptionInput).toBeInTheDocument();
     expect(textLabel).toBeInTheDocument();

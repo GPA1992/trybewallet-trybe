@@ -95,7 +95,7 @@ class WalletEditForm extends Component {
               <textarea
                 onChange={ this.handleChange }
                 name="description"
-                data-testid="description-input"
+                data-testid="description-edit-input"
                 id="expenseDescribre"
                 cols="30"
                 rows="1"
@@ -169,6 +169,7 @@ class WalletEditForm extends Component {
             <button
               onClick={ this.handleClick }
               type="reset"
+              data-testid="edit-form"
             >
               Editar despesa
             </button>

@@ -14,7 +14,7 @@ O objetivo desse projeto é validar meus conhecimentos em manipulação de estad
 
 ## Instruções para rodar o projeto
 
-1. Clone o repositório do projeto: `git clone https://github.com/gpa1992/wallet.git`
+1. Clone o repositório do projeto: `git clone git@github.com:GPA1992/wallet.git`
 2. Entre na pasta do projeto: `cd wallet`
 3. Instale as dependências: `npm install` ou `yarn install`
 4. Inicie o projeto: `npm start` ou `yarn start`
